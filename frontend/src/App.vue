@@ -1,26 +1,43 @@
 
 <template>
-<div>
-  <NavBar />
+  <div>
+    <NavBar />
+    <Slider />
 
-<div class="bg-no-repeat h-[600px] w-screen bg-cover bg-center" style="background-image: url(../public/img/slider.png);">
-  <div class="container">
-    <div class="flex flex-col h-[600px] items-start justify-center gap-8">
-      <h1 class="text-6xl bg-black bg-opacity-75 text-white p-1">New shoe!</h1>
-      <h3 class="text-2xl bg-black bg-opacity-75 text-white p-1">Nike AirMax Something for only $129</h3>
-      <button class="bg-[#3D81F5] rounded text-white p-2">View product</button>
+    <div class="container my-8">
+      <h2 class="text-xl pb-4">Featured products</h2>
+      <div class="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-8">
+        <div class="relative" v-for="item in 12" :key="item">
+          <a class="absolute inset-4" href=""><Icon icon="akar-icons:star" width="20" /></a>
+          <div class="flex flex-col gap-2">
+            <img src="../public/img/slider.png" alt="" />
+            <h3 class="text-md font-bold">Product Name</h3>
+            <p>$129</p>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-</div>
 
+
+    <Footer />
+
+
+
+  </div>
 </template>
 
-<script setup lang="ts">
-import NavBar from './components/NavBar.vue'
+<script lang="ts">
+import NavBar from "./components/NavBar.vue";
+import Slider from "./components/Slider.vue";
+import Footer from "./components/Footer.vue";
+import { Icon } from '@iconify/vue';
+export default {
+	components: {
+		Icon, NavBar, Slider, Footer
+	}
+}
 
 </script>
 
 <style scoped>
-
 </style>
