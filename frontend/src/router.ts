@@ -5,7 +5,7 @@ const Single = () => import('./pages/Single.vue')
 
 const routes = [
     { path: '/', name:'home', component: Home },
-    { path: '/product/:id', name: 'single', component: Single },
+    { path: '/products/:id', name: 'single', component: Single },
 ]
 
 const router = createRouter({

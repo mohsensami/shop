@@ -1,6 +1,6 @@
 <template>
 <div class="">
-  
+  {{product}}
   <div class="bg-[#F7FAFC] py-8">
     <div class="container">
     <section>
@@ -13,9 +13,9 @@
         </div>
         <div class="col-span-6">
           <div class="flex flex-col gap-8">
-            <h1 class="text-3xl">Product Name</h1>
+            <h1 class="text-3xl">{{ product.title }}</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque interdum tristique commodo ac vitae condimentum mauris odio.</p>
-            <span>$129</span>
+            <span>${{ product.unit_price }}</span>
             <div class="flex items-center gap-8">
               <Icon icon="akar-icons:star" color="black" width="32" />
               <button class="bg-[#3D81F5] rounded text-white p-2">View product</button>
@@ -46,6 +46,9 @@
 </template>
 
 <script>
+import axios from "../plugins/axios.js";
+import { reactive, onMounted } from "vue";
+
 import { useRoute } from "vue-router";
 import { Icon } from '@iconify/vue';
 
@@ -54,6 +57,25 @@ export default {
   components: {
     route, Icon
   },
+  setup() {
+    const product = reactive({});
+
+    const getProduct = async () => {
+      const data = await axios.get("store/products/5/?format=json");
+      Object.assign(product, data.data);
+    };
+
+    onMounted(async () => {
+      try {
+        getProduct();
+      } catch (error) {
+        errorText.value = "اررور داشتیم";
+      }
+    });
+
+    return { getProduct, product  };
+
+  }
 }
 </script>
 
