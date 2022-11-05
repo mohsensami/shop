@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-no-repeat h-[600px] w-full bg-cover bg-center" style="background-image: url(../public/img/slider.png);">
+  <div class="bg-no-repeat h-[600px] w-full bg-cover bg-bottom" style="background-image: url(https://picsum.photos/id/866/1920/750);">
   <div class="container">
     <div class="flex flex-col h-[600px] items-start justify-center gap-8">
       <h1 class="text-6xl bg-black bg-opacity-75 text-white p-1">New shoe!</h1>

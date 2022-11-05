@@ -1,15 +1,14 @@
 <template>
 <div class="">
-  {{product}}
   <div class="bg-[#F7FAFC] py-8">
     <div class="container">
     <section>
       <div class="mb-4">
-        <p>Products / Shoes / Sportshoes</p>
+        <p>Products / {{product.collection?.title}} / {{product.title}}</p>
       </div>
       <div class="grid grid-cols-12 gap-12">
         <div class="col-span-6">
-          <img src="../../public/img/slider.png" alt="">
+          <img :src="`https://picsum.photos/seed/` + product.id + `/800/500`" alt="">
         </div>
         <div class="col-span-6">
           <div class="flex flex-col gap-8">
@@ -18,7 +17,7 @@
             <span>${{ product.unit_price }}</span>
             <div class="flex items-center gap-8">
               <Icon icon="akar-icons:star" color="black" width="32" />
-              <button class="bg-[#3D81F5] rounded text-white p-2">View product</button>
+              <button @click="addToCart()" class="btn-primary custom-transition"> Add to cart </button>
             </div>
           </div>
         </div>
@@ -34,7 +33,7 @@
         <div class="relative" v-for="item in 4" :key="item">
           <a class="absolute inset-4" href=""><Icon icon="akar-icons:star" width="20" /></a>
           <div class="flex flex-col gap-2">
-            <img src="../../public/img/slider.png" alt="" />
+            <img :src="`https://picsum.photos/seed/` + item + `/800/500`" alt="" />
             <h3 class="text-md font-bold">Product Name</h3>
             <p>$129</p>
           </div>
@@ -52,28 +51,27 @@ import { reactive, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { Icon } from '@iconify/vue';
 
-const route = useRoute();
 export default {
   components: {
-    route, Icon
+    Icon
   },
   setup() {
+    const route = useRoute();
     const product = reactive({});
-
     const getProduct = async () => {
-      const data = await axios.get("store/products/5/?format=json");
-      Object.assign(product, data.data);
+      const {data} = await axios.get(`store/products/${route.params.id}/?format=json`);
+      Object.assign(product, data);
     };
 
     onMounted(async () => {
       try {
-        getProduct();
+        await getProduct();
       } catch (error) {
-        errorText.value = "اررور داشتیم";
+        // errorText.value = "اررور داشتیم";
       }
     });
 
-    return { getProduct, product  };
+    return {  product, route  };
 
   }
 }
