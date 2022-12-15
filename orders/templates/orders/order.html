@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+
+{% block title %}Chekout - Shop{%endblock%}
+
+{% block style %}
+<style>
+    .table-scroll{padding:0px}.profile-image{text-align:center}.profile-image a{border-radius:50%;border:2px solid var(--primary)}.profile-image a img{width:80px;border-radius:50%;border:3px solid var(--white)}.profile-card{position:relative}.profile-card .user-action{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;position:absolute;top:50%;right:15px;opacity:0;visibility:hidden;-webkit-transform:translateY(-50%);transform:translateY(-50%);transition:all linear .3s;-webkit-transition:all linear .3s;-moz-transition:all linear .3s;-ms-transition:all linear .3s;-o-transition:all linear .3s}.profile-card .user-action li{margin:5px 0px}.payment-card{position:relative}.payment-card .user-action{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;position:absolute;top:15px;right:15px;opacity:0;visibility:hidden;transition:all linear .3s;-webkit-transition:all linear .3s;-moz-transition:all linear .3s;-ms-transition:all linear .3s;-o-transition:all linear .3s}.modal-form{width:400px;padding:30px;border-radius:8px;background:var(--white)}.chekout-voucher{width:600px;margin:45px auto 5px;text-align:center}.checkout-charge{width:600px;margin:0 auto}.checkout-charge ul{border-top:3px solid var(--primary)}.checkout-charge ul li{padding:15px 15px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;border-bottom:1px solid var(--border)}.checkout-charge ul li:last-child{border-bottom:none}.checkout-charge ul li:last-child span{font-size:18px;font-weight:900;color:var(--primary)}.checkout-charge ul li span{font-weight:700;color:var(--heading);text-transform:capitalize}.checkout-charge ul li span small{font-size:14px;font-weight:700;margin-left:3px}.checkout-check{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:start;margin-bottom:25px;margin-top:50px}.checkout-check input{width:15px;height:15px;margin-right:10px;margin-top:4px;cursor:pointer}.checkout-check label{line-height:22px}.checkout-check label a{color:var(--primary)}.checkout-check label a:hover{text-decoration:underline}.checkout-proced .btn{width:100%}@media (max-width: 575px){.modal-form{width:100%}}@media (max-width: 767px){.chekout-voucher,.checkout-charge{width:100%}}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="single-banner" style="background: url(https://mironmahmud.com/ecomart/assets/ltr/images/shop/banner/bakery/single-banner.jpg) no-repeat center; background-size: cover;">
+    <div class="container">
+        <h2>checkout</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">checkout</li>
+        </ol>
+    </div>
+</section>
+
+<section class="checkout-part">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="alert-info">
+                    <p>Returning customer? <a href="login.html">Click here to login</a></p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="account-card">
+                    <div class="account-title">
+                        <h4>Your order</h4>
+                    </div>
+                    <div class="account-content">
+                        <div class="table-scroll">
+                            <table class="table-list">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">SL No</th>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for o in order.items.all %}
+                                    <tr>
+                                        <td>
+                                            <h5>{{forloop.counter}}</h5>
+                                        </td>
+                                        <td><img src="{{o.product.image.url}}" alt="product"></td>
+                                        <td>
+                                            <h5>{{o.product.name}}</h5>
+                                        </td>
+                                        <td>
+                                            <h5>${{ o.price }}<small>/per</small></h5>
+                                        </td>
+                                        <td>
+                                            <h5>{{ o.quantity }}</h5>
+                                        </td>
+                                        <td>
+                                            <h5>${{ o.get_cost }}</h5>
+                                        </td>
+                                        <td>
+                                            <ul class="table-action">
+                                                <!-- <li><a class="view" href="#" title="View This Item" data-toggle="modal" data-target="#product-view"><i class="icofont-eye-alt"></i></a></li> -->
+                                                <li><a class="trash" href="{% url 'orders:cart_remove' o.product.id %}" title="Remove This Item"><i class="icofont-trash"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="chekout-voucher"><button class="voucher-btn">Do you have a coupon code?</button>
+                            <form class="voucher-form"><input type="text" placeholder="Enter your voucher code"><button type="submit" class="btn btn-inline">apply</button></form>
+                        </div>
+                        <div class="checkout-charge">
+                            <ul>
+                                <li><span>Sub total</span><span>$267.45</span></li>
+                                <li><span>delivery fee</span><span>$10.00</span></li>
+                                <li><span>discount</span><span>${{ order.calculate_discount }}</span></li>
+                                <li><span>Total<small>(Incl. VAT)</small></span><span>${{order.get_total_price}}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="account-card">
+                    <div class="account-title">
+                        <h4>delivery Schedule</h4>
+                    </div>
+                    <div class="account-content">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4 alert fade show">
+                                <div class="profile-card address active">
+                                    <h5>Express</h5>
+                                    <p>90 min express delivery</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 alert fade show">
+                                <div class="profile-card address">
+                                    <h5>8am-10pm</h5>
+                                    <p>8.00 AM - 10.00 PM</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 alert fade show">
+                                <div class="profile-card address mb-0">
+                                    <h5>Next day</h5>
+                                    <p>Next day or Tomorrow</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="account-card">
+                    <div class="account-title">
+                        <h4>delivery address</h4><button data-toggle="modal" data-target="#address-add">add address</button>
+                    </div>
+                    <div class="account-content">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4 alert fade show">
+                                <div class="profile-card address active">
+                                    <h5>Home</h5>
+                                    <p>jalkuri, fatullah, narayanganj-1420. word no-09, road no-17/A</p>
+                                    <ul class="user-action">
+                                        <li><button class="edit" title="Edit This" data-toggle="modal" data-target="#address-edit"><i class="icofont-edit"></i></button></li>
+                                        <li><button class="delete" title="Remove This" data-dismiss="alert"><i class="icofont-ui-delete"></i></button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 alert fade show">
+                                <div class="profile-card address">
+                                    <h5>Office</h5>
+                                    <p>tejturi bazar, dhaka-1200. word no-04, road no-13/C, house no-4/b</p>
+                                    <ul class="user-action">
+                                        <li><button class="edit" title="Edit This" data-toggle="modal" data-target="#address-edit"><i class="icofont-edit"></i></button></li>
+                                        <li><button class="delete" title="Remove This" data-dismiss="alert"><i class="icofont-ui-delete"></i></button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 alert fade show">
+                                <div class="profile-card address mb-0">
+                                    <h5>Bussiness</h5>
+                                    <p>kawran bazar, dhaka-1100. word no-02, road no-13/d, house no-7/m</p>
+                                    <ul class="user-action">
+                                        <li><button class="edit" title="Edit This" data-toggle="modal" data-target="#address-edit"><i class="icofont-edit"></i></button></li>
+                                        <li><button class="delete" title="Remove This" data-dismiss="alert"><i class="icofont-ui-delete"></i></button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="account-card">
+                    <div class="account-title">
+                        <h4>contact number</h4><button data-toggle="modal" data-target="#contact-add">add contact</button>
+                    </div>
+                    <div class="account-content">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4 alert fade show">
+                                <div class="profile-card contact active">
+                                    <h5>primary</h5>
+                                    <p>+8801838288389</p>
+                                    <ul class="user-action">
+                                        <li><button class="edit" title="Edit This" data-toggle="modal" data-target="#contact-edit"><i class="icofont-edit"></i></button></li>
+                                        <li><button class="delete" title="Remove This" data-dismiss="alert"><i class="icofont-ui-delete"></i></button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 alert fade show">
+                                <div class="profile-card contact">
+                                    <h5>secondary</h5>
+                                    <p>+8801941101915</p>
+                                    <ul class="user-action">
+                                        <li><button class="edit" title="Edit This" data-toggle="modal" data-target="#contact-edit"><i class="icofont-edit"></i></button></li>
+                                        <li><button class="delete" title="Remove This" data-dismiss="alert"><i class="icofont-ui-delete"></i></button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 alert fade show">
+                                <div class="profile-card contact mb-0">
+                                    <h5>secondary</h5>
+                                    <p>+8801747875727</p>
+                                    <ul class="user-action">
+                                        <li><button class="edit" title="Edit This" data-toggle="modal" data-target="#contact-edit"><i class="icofont-edit"></i></button></li>
+                                        <li><button class="delete" title="Remove This" data-dismiss="alert"><i class="icofont-ui-delete"></i></button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="account-card mb-0">
+                    <div class="account-title">
+                        <h4>payment option</h4><button data-toggle="modal" data-target="#payment-add">add card</button>
+                    </div>
+                    <div class="account-content">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4 alert fade show">
+                                <div class="payment-card payment active"><img src="../../images/payment/01.png" alt="payment">
+                                    <h4>card number</h4>
+                                    <p><span>****</span><span>****</span><span>****</span><sup>1876</sup></p>
+                                    <h5>miron mahmud</h5>
+                                    <ul class="user-action">
+                                        <li><button class="delete" title="Remove This" data-dismiss="alert"><i class="icofont-ui-delete"></i></button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 alert fade show">
+                                <div class="payment-card payment"><img src="../../images/payment/02.png" alt="payment">
+                                    <h4>card number</h4>
+                                    <p><span>****</span><span>****</span><span>****</span><sup>1876</sup></p>
+                                    <h5>miron mahmud</h5>
+                                    <ul class="user-action">
+                                        <li><button class="delete" title="Remove This" data-dismiss="alert"><i class="icofont-ui-delete"></i></button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 alert fade show">
+                                <div class="payment-card payment mb-0"><img src="../../images/payment/03.png" alt="payment">
+                                    <h4>card number</h4>
+                                    <p><span>****</span><span>****</span><span>****</span><sup>1876</sup></p>
+                                    <h5>miron mahmud</h5>
+                                    <ul class="user-action">
+                                        <li><button class="delete" title="Remove This" data-dismiss="alert"><i class="icofont-ui-delete"></i></button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout-check"><input type="checkbox"><label>By making this purchase you agree to our <a href="#">Terms and Conditions</a>.</label></div>
+                        <div class="checkout-proced"><a href="{% url 'orders:order_pay' order.id %}" class="btn btn-inline">Pay</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer-part">
+    <p>Ecomart | © Copyright by <a href="#">Mironcoder</a></p>
+</footer>
+
+{% endblock %}

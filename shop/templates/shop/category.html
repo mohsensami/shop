@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<style>
+.single-banner{padding:90px 0px 150px}.brand-profile{position:relative;text-align:center;margin-top:-100px;margin-bottom:30px;z-index:1}.brand-logo i{padding: 17px;width:160px;height:160px;line-height:150px;border-radius:50%;margin-bottom:10px;text-align:center;background:var(--white);border:3px solid var(--primary)}.brand-name{font-size:26px;margin-bottom:3px}.brand-name a{color:var(--heading);transition:all linear .3s;-webkit-transition:all linear .3s;-moz-transition:all linear .3s;-ms-transition:all linear .3s;-o-transition:all linear .3s}.brand-name a:hover{color:var(--primary)}.brand-item{font-weight:700;text-transform:capitalize}
+</style>
+{% endblock %}
+
+{% block content %}
+
+
+
+<section class="single-banner mb-0" style="background: url(https://mironmahmud.com/ecomart/assets/ltr/images/shop/banner/grocery/single-banner.jpg) no-repeat center; background-size: cover;">
+  <div class="container">
+    <h2>brand profile</h2>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">brand profile</li>
+    </ol>
+  </div>
+</section>
+
+
+<section class="product-part">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="brand-profile"><a class="brand-logo" href="#"><i style="font-size: 100px;" class="icofont-{{ category.icon }}"></i></a>
+          <h3 class="brand-name"><a href="#">{{category.name}}</a></h3>
+          <p class="brand-item">total item: <span>{{products|length}}</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-5">
+      {% for product in products %}
+      <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+        <div class="product-card">
+          <figure class="product-media">
+            <div class="product-label-group"><label class="product-label label-new">new</label><label class="product-label label-off">-10%</label></div><a class="product-image" href="{% url 'shop:detail' product.slug %}"><img src="{{ product.image.url }}" alt="product"></a>
+          </figure>
+          <div class="product-content">
+            <h5 class="product-price"><span>${{ product.price }} </span><del>$42</del></h5>
+            <h5 class="product-name"><a href="{% url 'shop:detail' product.slug %}">{{ product.name }}</a></h5>
+            {{form}}
+            <div class="product-action-group">
+              <div class="product-action"><a href="{% url 'shop:add_favorites' product.id %}" class="action-wish" title="Product Wish"><i class="icofont-ui-love"></i></a>
+                <a class="action-cart" href="{% url 'shop:detail' product.slug %}"><button class="action-cart" title="Add to Cart"><span>See More</span></button></a>
+                <!-- <button class="action-view" title="Product View" data-toggle="modal" data-target="#product-view"><i class="icofont-eye-alt"></i></button> -->
+              </div>
+              <div class="product-action"><button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button><input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"><button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+        <div class="product-card">Empty</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

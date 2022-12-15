@@ -1,0 +1,20 @@
+{% for category in categories %}
+{% if category.scategory.all %}
+<li class="nav-item dropdown">
+    <a class="dropdown-toggle nav-link {% if request.resolver_match.url_name == 'shop:home' %} active {% endif %}" href="{{ category.get_absolute_url }}" data-bs-toggle="dropdown">
+        {{ category.name }}
+    </a>
+    
+    <ul class="dropdown-menu">
+        {% for sub in category.scategory.all %}
+        <li> <a class="dropdown-item" href="{{ sub.get_absolute_url }}">{{ sub.name }}</a> </li>
+        {% endfor %}
+    </ul>
+</li>
+{% else %}
+<li class="nav-item">
+    <a class="nav-link {% if request.resolver_match.url_name == 'shop:home' %} active {% endif %}" href="{{ category.get_absolute_url }}">{{ category.name }}</a>
+</li>
+{% endif %}
+{% endfor %}
+

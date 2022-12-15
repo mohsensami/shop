@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Favourite - Shop{%endblock%}
+
+{% block content %}
+
+
+<section class="single-banner" style="background: url(https://mironmahmud.com/ecomart/assets/ltr/images/shop/banner/cosmetics/single-banner.jpg) no-repeat center; background-size: cover;">
+    <div class="container">
+        <h2>your wishlist</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">wishlist</li>
+        </ol>
+    </div>
+</section>
+
+<section class="wish-part">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-scroll">
+                    <table class="table-list">
+                        <thead>
+                            <tr>
+                                <th scope="col">SL No</th>
+                                <th scope="col">Product</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">status</th>
+                                <th scope="col">shopping</th>
+                                <th scope="col">action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in favourite_products %}
+                            <tr>
+                                <td>
+                                    <h5>{{ forloop.counter }}</h5>
+                                </td>
+                                <td><img src="{{ product.image.url }}" alt="product"></td>
+                                <td>
+                                    <h5>{{ product.name }}</h5>
+                                </td>
+                                <td>
+                                    <h5>${{ product.price }}</h5>
+                                </td>
+                                <td>
+                                    <h5 class="stock-in">{{ product.available }}</h5>
+                                </td>
+                                <td><a class="table-cart" href="#">Add to Cart</a></td>
+                                <td>
+                                    <ul class="table-action">
+                                        <!-- <li><a class="view" href="#" title="View This Item" data-toggle="modal" data-target="#product-view"><i class="icofont-eye-alt"></i></a></li> -->
+                                        <li><a class="trash" href="{% url 'shop:add_favorites' product.id %}" title="Remove This Item"><i class="icofont-trash"></i></a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="load-btn mt-5"><button class="btn btn-outline">Load more items </button></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer class="footer-part">
+    <p>Ecomart | © Copyright by <a href="#">Mironcoder</a></p>
+</footer>
+
+
+{% endblock %}

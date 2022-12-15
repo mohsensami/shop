@@ -1,0 +1,166 @@
+
+{% load base_tags %}
+
+
+<header class="header-part">
+    <div class="container">
+      <div class="header-left">
+        <div class="header-icon-group"><button class="icon-nav"><i class="icofont-align-left"></i></button><a class="header-logo" href="{% url 'shop:home' %}"><img src="https://mironmahmud.com/ecomart/assets/ltr/images/logo.png" alt="logo"></a><button class="icon-cross"><i class="icofont-close"></i></button></div>
+        <div class="select-option"><img class="img" src="https://mironmahmud.com/ecomart/assets/ltr/images/language/english.png" alt="language"><span class="text">english</span>
+          <ul class="option-list">
+            <li><a href="#"><img src="https://mironmahmud.com/ecomart/assets/ltr/images/language/english.png" alt="language"><span>english</span></a></li>
+            <li><a href="https://mironmahmud.com/ecomart/assets/ltr/../rtl/html/gadgets/index.html"><img src="https://mironmahmud.com/ecomart/assets/ltr/images/language/arabic.png" alt="language"><span>arabic</span></a></li>
+          </ul>
+        </div>
+      </div>
+      <form action="{% url 'shop:search' %}" method="GET" class="header-middle">
+        <div class="select-option"><i class="icon icofont-camera"></i><span class="text">gadgets</span>
+          <ul class="option-list">
+            <li><a href="../grocery/index.html"><i class="icofont-grocery"></i><span>grocery</span></a></li>
+            <li><a href="../bakery/index.html"><i class="icofont-cup-cake"></i><span>bakery</span></a></li>
+            <li><a href="../clothes/index.html"><i class="icofont-jacket"></i><span>clothes</span></a></li>
+            <li><a href="../gadgets/index.html"><i class="icofont-camera"></i><span>gadgets</span></a></li>
+            <li><a href="../furniture/index.html"><i class="icofont-chair"></i><span>furniture</span></a></li>
+            <li><a href="../cosmetics/index.html"><i class="icofont-paint"></i><span>cosmetics</span></a></li>
+          </ul>
+        </div><input name="search" type="text" placeholder="Search anything..."><button type="submit"><i class="icofont-ui-search"></i></button>
+      </form>
+      <div class="header-right">
+        {% if request.user.is_authenticated %}
+          <div class="select-menu header-user"><img class="img" src="https://mironmahmud.com/ecomart/assets/ltr/images/user.png" alt="user"><span class="text">{{ request.user.full_name }}</span></div>
+        {% else %}
+          <div class="product-name pt-3"><a style="display: flex;justify-content: center;align-items: center;gap: 10px;" href="{% url 'accounts:login' %}"><i class="icofont-user-male"></i> Login/Register</a></div>
+        {% endif %}
+        <div class="header-icon-group"><a href="{% url 'shop:favorites' %}"><i class="icofont-ui-love"></i><sup>{% favourite_count request.user %}</sup></a><button class="icon-check"><i class="icofont-shopping-cart"></i><span>${{ cart.get_total_price }}</span><sup>{{ cart|length }}</sup></button></div>
+      </div>
+    </div>
+    {% include 'inc/messages.html' %}
+  </header>
+  <nav class="sidebar-nav">
+    <div class="nav-container">
+      <div class="nav-header"><button class="nav-close"><i class="icofont-close"></i></button><a class="nav-logo" href="index.html"><img src="https://mironmahmud.com/ecomart/assets/ltr/images/logo.png" alt="logo"></a>
+        <ul class="nav nav-tabs">
+          <li><a href="#menu-list" class="nav-link active" data-toggle="tab">menu list</a></li>
+          <li><a href="#cate-list" class="nav-link" data-toggle="tab">cate list</a></li>
+        </ul>
+      </div>
+      <div class="nav-content">
+        <div class="tab-pane active" id="menu-list">
+          <div class="nav-profile"><a href="profile.html"><img src="https://mironmahmud.com/ecomart/assets/ltr/images/user.png" alt="user"></a>
+            <h4><a href="#">{{ request.user.full_name }}</a></h4>
+          </div>
+          <ul class="nav-list">
+            <li class="select-option"><img class="img" src="https://mironmahmud.com/ecomart/assets/ltr/images/language/english.png" alt="language"><span class="text">english</span>
+              <ul class="option-list">
+                <li><a href="#"><img src="https://mironmahmud.com/ecomart/assets/ltr/images/language/english.png" alt="language"><span>english</span></a></li>
+                <li><a href="https://mironmahmud.com/ecomart/assets/ltr/../rtl/html/gadgets/index.html"><img src="https://mironmahmud.com/ecomart/assets/ltr/images/language/arabic.png" alt="language"><span>arabic</span></a></li>
+              </ul>
+            </li>
+            <li><a class="nav-link" href="index.html"><i class="icofont-ui-home"></i><span>home</span></a></li>
+            <li><a class="nav-link" href="offer.html"><i class="icofont-sale-discount"></i><span>offers</span></a></li>
+            <li><a class="nav-link" href="brand.html"><i class="icofont-shield"></i><span>brands</span></a></li>
+            <li><a class="nav-link" href="brand-profile.html"><i class="icofont-crown"></i><span>brand profile</span></a></li>
+            <li><a class="nav-link" href="profile.html"><i class="icofont-ui-user"></i><span>my profile</span></a></li>
+            <li><a class="nav-link" href="{% url 'shop:favorites' %}"><i class="icofont-ui-love"></i><span>wishlist</span></a></li>
+            <li><a class="nav-link" href="checkout.html"><i class="icofont-ui-check"></i><span>checkout</span></a></li>
+            <li><a class="nav-link" href="orderlist.html"><i class="icofont-basket"></i><span>your order</span></a></li>
+            <li><a class="nav-link" href="invoice.html"><i class="icofont-page"></i><span>order invoice</span></a></li>
+            <li><a class="nav-link" href="support.html"><i class="icofont-question-circle"></i><span>need help</span></a></li>
+            <li><a class="nav-link" href="contact.html"><i class="icofont-contacts"></i><span>contact us</span></a></li>
+            <li><a class="nav-link" href="{% url 'accounts:logout' %}"><i class="icofont-ui-lock"></i><span>logout</span></a></li>
+          </ul>
+        </div>
+        <div class="tab-pane" id="cate-list">
+          <ul class="cate-list">
+            <li><a class="cate-link dropdown" href="#"><i class="flaticon-watch"></i><span>smart watch</span></a>
+              <ul class="dropdown-list">
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+              </ul>
+            </li>
+            <li><a class="cate-link dropdown" href="#"><i class="flaticon-mobile-phone"></i><span>mobile phone</span></a>
+              <ul class="dropdown-list">
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+              </ul>
+            </li>
+            <li><a class="cate-link dropdown" href="#"><i class="flaticon-photo-camera"></i><span>camera</span></a>
+              <ul class="dropdown-list">
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+              </ul>
+            </li>
+            <li><a class="cate-link dropdown" href="#"><i class="flaticon-lcd"></i><span>monitor</span></a>
+              <ul class="dropdown-list">
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+              </ul>
+            </li>
+            <li><a class="cate-link dropdown" href="#"><i class="flaticon-laptop"></i><span>laptop</span></a>
+              <ul class="dropdown-list">
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+              </ul>
+            </li>
+            <li><a class="cate-link dropdown" href="#"><i class="flaticon-tablet"></i><span>tablet</span></a>
+              <ul class="dropdown-list">
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+              </ul>
+            </li>
+            <li><a class="cate-link dropdown" href="#"><i class="flaticon-keyboard"></i><span>keyboard</span></a>
+              <ul class="dropdown-list">
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+              </ul>
+            </li>
+            <li><a class="cate-link dropdown" href="#"><i class="flaticon-mouse"></i><span>mouse</span></a>
+              <ul class="dropdown-list">
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+              </ul>
+            </li>
+            <li><a class="cate-link dropdown" href="#"><i class="flaticon-pendrive"></i><span>pendrive</span></a>
+              <ul class="dropdown-list">
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+              </ul>
+            </li>
+            <li><a class="cate-link dropdown" href="#"><i class="flaticon-jack-cable"></i><span>cable</span></a>
+              <ul class="dropdown-list">
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+              </ul>
+            </li>
+            <li><a class="cate-link dropdown" href="#"><i class="flaticon-internet"></i><span>router</span></a>
+              <ul class="dropdown-list">
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+              </ul>
+            </li>
+            <li><a class="cate-link dropdown" href="#"><i class="flaticon-gamepad"></i><span>gamepad</span></a>
+              <ul class="dropdown-list">
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+                <li><a href="#">item name</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="nav-footer">
+          <p>&COPY; Copyright by <a href="#">Mironcoder</a></p>
+        </div>
+      </div>
+    </div>
+  </nav>

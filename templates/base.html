@@ -1,0 +1,83 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="mironcoder">
+  <meta name="email" content="mironcoder@gmail.com">
+  <meta name="profile" content="https://themeforest.net/user/mironcoder">
+  <meta name="template" content="Ecomart">
+  <meta name="title" content="Ecomart - eCommerce HTML Template">
+  <meta name="keywords" content="html, ecomart, ecommerce, clothing, food, electronics, minimal, beauty, shopping, simple, fashion, single vendor, multipurpose, store, shop">
+  <title>{% block title %}Shop{%endblock%}</title>
+  <link rel="icon" href="https://mironmahmud.com/ecomart/assets/ltr/images/favicon.png">
+  <link rel="stylesheet" href="{% static 'assets/css/icofont.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/index.css' %}">
+  {% block style %}{%endblock%}
+</head>
+
+<body>
+
+{% include 'inc/header.html' %}
+
+
+<aside class="sidebar-check">
+  <div class="check-container">
+    <div class="check-header"><button class="check-close"><i class="icofont-close"></i></button>
+      <div class="cart-total"><i class="icofont-basket"></i>
+        <h5><span>total item</span><span>({{ cart|length }})</span></h5>
+      </div>
+    </div>
+    <ul class="cart-list">
+    {% for item in cart %}
+      <li class="cart-item alert">
+        <div class="cart-image"><a href="#"><img src="https://picsum.photos/150/" alt="product"></a></div>
+        <div class="cart-info">
+          <h5><a href="product-single.html">{{item.product}}</a></h5><span>${{ item.price }} X {{ item.quantity }}</span>
+          <h6>${{ item.total_price }}</h6>
+          <div class="product-action"><button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button><input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"><button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button></div>
+        </div><a href="{% url 'orders:cart_remove' item.product.id %}" class="cart-delete"><i class="icofont-bin"></i></a>
+      </li>
+      {% empty %}
+      <div class="cart-total">
+        <!-- <i class="icofont-basket"></i> -->
+        <h5>Empty</h5>
+      </div>
+      {% endfor %}
+    </ul>
+    <div class="check-footer"><button class="voucher-btn">Do you have a coupon code?</button>
+      <form class="voucher-form"><input type="text" placeholder="Enter your voucher code"><button type="submit" class="btn btn-inline">apply</button></form><a href="{% url 'orders:order_create' %}" class="check-btn"><span class="check-title">checkout</span><span class="check-price">${{ cart.get_total_price }}</span></a>
+    </div>
+  </div>
+</aside>
+{% block content %}
+<div class="mobile-check">
+  <button class="check-btn">
+    <span class="check-item"><i class="icofont-basket"></i><span>0 items</span></span><span class="check-price">$00.00</span>
+  </button>
+</div>
+{% endblock %}
+
+
+<script src="{% static 'assets/js/jquery-1.12.4.min.js' %}"></script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/header-part.js' %}"></script>
+<script src="{% static 'assets/js/product-part.js' %}"></script>
+<script src="{% static 'assets/js/product-view.js' %}"></script>
+<script src="{% static 'assets/js/select-option.js' %}"></script>
+<script src="{% static 'assets/js/dropdown.js' %}"></script>
+<script src="{% static 'assets/js/slick.min.js' %}"></script>
+<script src="{% static 'assets/js/slick.js' %}"></script>
+<script src="{% static 'assets/js/main.js' %}"></script>
+
+{% block script %}{%endblock%}
+
+{% include 'inc/footer.html' %}

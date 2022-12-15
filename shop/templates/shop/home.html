@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{%endblock%}
+
+{% block content %}
+
+  <section class="banner-part">
+
+      <div class="">
+        <div class="">
+          <div class="banner-content" style="background: url(https://mironmahmud.com/ecomart/assets/ltr/images/shop/banner/gadgets/banner.jpg) no-repeat center; background-size: cover;">
+            <h1>get your gadget items quickly.</h1>
+            <p>We are always ready to deliver product to your doorstep every day</p>
+            <form action="{% url 'shop:search' %}" method="GET" class="banner-form">
+              <div class="select-option"><i class="icon icofont-camera"></i><span class="text">gadgets</span>
+                <ul class="option-list">
+                  <li><a href="../grocery/index.html"><i class="icofont-grocery"></i><span>grocery</span></a></li>
+                  <li><a href="../bakery/index.html"><i class="icofont-cup-cake"></i><span>bakery</span></a></li>
+                  <li><a href="../clothes/index.html"><i class="icofont-jacket"></i><span>clothes</span></a></li>
+                  <li><a href="../gadgets/index.html"><i class="icofont-camera"></i><span>gadgets</span></a></li>
+                  <li><a href="../furniture/index.html"><i class="icofont-chair"></i><span>furniture</span></a></li>
+                  <li><a href="../cosmetics/index.html"><i class="icofont-paint"></i><span>cosmetics</span></a></li>
+                </ul>
+              </div>
+              <input name="search" type="text" placeholder="Search anything...">
+              <button type="submit"><i class="icofont-ui-search"></i><span>search</span></button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+  </section>
+  <section class="promo-part">
+    <div class="container">
+      <ul class="promo-slider slider-arrow">
+        <li><a href="#"><img src="https://mironmahmud.com/ecomart/assets/ltr/images/promo/01.jpg" alt="promo"></a></li>
+        <li><a href="#"><img src="https://mironmahmud.com/ecomart/assets/ltr/images/promo/02.jpg" alt="promo"></a></li>
+        <li><a href="#"><img src="https://mironmahmud.com/ecomart/assets/ltr/images/promo/03.jpg" alt="promo"></a></li>
+        <li><a href="#"><img src="https://mironmahmud.com/ecomart/assets/ltr/images/promo/04.jpg" alt="promo"></a></li>
+      </ul>
+    </div>
+  </section>
+  <section class="product-part">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="product-category sticky-top rounded">
+            <ul class="cate-list">
+              {% for cat in categories %}
+              <li><a class="cate-link" href="{% url 'shop:category_filter' cat.slug %}"><i class="icofont-{{ cat.icon }}"></i><span>{{ cat.name }}</span></a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-9">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="product-filter">
+                <div class="product-filter-short"><label class="form-label">short by:</label><select class="form-select">
+                    <option value="default">default</option>
+                    <option value="new">new product</option>
+                    <option value="discount">discount product</option>
+                  </select></div>
+                <ul class="product-filter-list">
+                  <li><button class="column-3" data-toggle="tooltip" title="Three Column"><i class="icofont-justify-all"></i></button></li>
+                  <li><button class="column-4" data-toggle="tooltip" title="Four Column"><i class="icofont-indent"></i></button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            {% for product in products %}
+            <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+              <div class="product-card">
+                <figure class="product-media">
+                  <div class="product-label-group"><label class="product-label label-new">new</label><label class="product-label label-off">-10%</label></div><a class="product-image" href="{% url 'shop:detail' product.slug %}"><img src="{{ product.image.url }}" alt="product"></a>
+                </figure>
+                <div class="product-content">
+                  <h5 class="product-price"><span>${{ product.price }} </span><del>$42</del></h5>
+                  <h5 class="product-name"><a href="{% url 'shop:detail' product.slug %}">{{ product.name }}</a></h5>
+                  {{form}}
+                  <div class="product-action-group">
+                    <div class="product-action"><a href="{% url 'shop:add_favorites' product.id %}" class="action-wish" title="Product Wish"><i class="icofont-ui-love"></i></a>
+                      <a class="action-cart" href="{% url 'shop:detail' product.slug %}"><button class="action-cart" title="Add to Cart"><span>See More</span></button></a>
+                      <!-- <button class="action-view" title="Product View" data-toggle="modal" data-target="#product-view"><i class="icofont-eye-alt"></i></button> -->
+                    </div>
+                    <div class="product-action"><button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button><input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"><button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="load-btn"><button class="btn btn-outline">Load more items </button></div>
+              <div class="footer-part">
+                <p>Ecomart | &COPY; Copyright by <a href="#">Mironcoder</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="modal fade" id="product-view">
+    <div class="modal-dialog">
+      <div class="modal-content"><button class="modal-close icofont-close" data-dismiss="modal"></button>
+        <div class="product-view">
+          <div class="row">
+            <div class="col-md-6 col-lg-6">
+              <div class="product-gallery">
+                <ul class="preview-slider">
+                  <li><img src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/gadgets/01.jpg" alt="product"></li>
+                  <li><img src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/gadgets/01.jpg" alt="product"></li>
+                  <li><img src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/gadgets/01.jpg" alt="product"></li>
+                  <li><img src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/gadgets/01.jpg" alt="product"></li>
+                  <li><img src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/gadgets/01.jpg" alt="product"></li>
+                  <li><img src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/gadgets/01.jpg" alt="product"></li>
+                  <li><img src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/gadgets/01.jpg" alt="product"></li>
+                </ul>
+                <ul class="thumb-slider">
+                  <li><img src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/gadgets/01.jpg" alt="product"></li>
+                  <li><img src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/gadgets/01.jpg" alt="product"></li>
+                  <li><img src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/gadgets/01.jpg" alt="product"></li>
+                  <li><img src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/gadgets/01.jpg" alt="product"></li>
+                  <li><img src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/gadgets/01.jpg" alt="product"></li>
+                  <li><img src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/gadgets/01.jpg" alt="product"></li>
+                  <li><img src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/gadgets/01.jpg" alt="product"></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-6">
+              <div class="product-details">
+                <h3 class="details-name"><a href="brand-profile.html">existing product name</a></h3>
+                <div class="details-meta">SKU:<span class="details-sku">1234567</span>BRAND:<a class="details-brand" href="#">radhuni</a></div>
+                <h3 class="details-price"><span>$124.00</span><del>$42.00</del></h3>
+                <p class="details-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit non tempora magni repudiandae sint suscipit tempore quis maxime explicabo veniam eos reprehenderit fuga</p>
+                <div class="details-group"><label class="details-group-title">tags:</label>
+                  <ul class="details-tag-list">
+                    <li><a href="#">gadgets</a></li>
+                    <li><a href="#">mobile</a></li>
+                    <li><a href="#">iphon</a></li>
+                  </ul>
+                </div>
+                <div class="details-group"><label class="details-group-title">Share:</label>
+                  <ul class="details-share-list">
+                    <li><a href="#" class="icofont-facebook"></a></li>
+                    <li><a href="#" class="icofont-twitter"></a></li>
+                    <li><a href="#" class="icofont-linkedin"></a></li>
+                  </ul>
+                </div>
+                <hr class="details-devider">
+                <div class="details-action-group"><button class="details-cart" title="Add Your Cartlist"><i class="icofont-cart"></i><span>add to cart</span></button>
+                  <div class="details-action"><button class="details-minus" title="Quantity Minus"><i class="icofont-minus"></i></button><input class="details-input" title="Quantity Number" type="text" name="quantity" value="1"><button class="details-plus" title="Quantity Plus"><i class="icofont-plus"></i></button></div><a href="#" class="details-wish" title="Add Your Wishlist"><i class="icofont-heart"></i><span>add to wish</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

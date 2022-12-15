@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+
+{% block title %}Cart - Shop{%endblock%}
+
+{% block style %}
+<style>
+    .table-scroll{padding:0px}.profile-image{text-align:center}.profile-image a{border-radius:50%;border:2px solid var(--primary)}.profile-image a img{width:80px;border-radius:50%;border:3px solid var(--white)}.profile-card{position:relative}.profile-card .user-action{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;position:absolute;top:50%;right:15px;opacity:0;visibility:hidden;-webkit-transform:translateY(-50%);transform:translateY(-50%);transition:all linear .3s;-webkit-transition:all linear .3s;-moz-transition:all linear .3s;-ms-transition:all linear .3s;-o-transition:all linear .3s}.profile-card .user-action li{margin:5px 0px}.payment-card{position:relative}.payment-card .user-action{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;position:absolute;top:15px;right:15px;opacity:0;visibility:hidden;transition:all linear .3s;-webkit-transition:all linear .3s;-moz-transition:all linear .3s;-ms-transition:all linear .3s;-o-transition:all linear .3s}.modal-form{width:400px;padding:30px;border-radius:8px;background:var(--white)}.chekout-voucher{width:600px;margin:45px auto 5px;text-align:center}.checkout-charge{width:600px;margin:0 auto}.checkout-charge ul{border-top:3px solid var(--primary)}.checkout-charge ul li{padding:15px 15px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;border-bottom:1px solid var(--border)}.checkout-charge ul li:last-child{border-bottom:none}.checkout-charge ul li:last-child span{font-size:18px;font-weight:900;color:var(--primary)}.checkout-charge ul li span{font-weight:700;color:var(--heading);text-transform:capitalize}.checkout-charge ul li span small{font-size:14px;font-weight:700;margin-left:3px}.checkout-check{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:start;margin-bottom:25px;margin-top:50px}.checkout-check input{width:15px;height:15px;margin-right:10px;margin-top:4px;cursor:pointer}.checkout-check label{line-height:22px}.checkout-check label a{color:var(--primary)}.checkout-check label a:hover{text-decoration:underline}.checkout-proced .btn{width:100%}@media (max-width: 575px){.modal-form{width:100%}}@media (max-width: 767px){.chekout-voucher,.checkout-charge{width:100%}}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="single-banner" style="background: url(https://mironmahmud.com/ecomart/assets/ltr/images/shop/banner/bakery/single-banner.jpg) no-repeat center; background-size: cover;">
+  <div class="container">
+      <h2>Cart</h2>
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Cart</li>
+      </ol>
+  </div>
+</section>
+
+<section class="padding-y">
+  <div class="container">
+    <!-- =================== COMPONENT CART+SUMMARY ====================== -->
+    <div class="row">
+      <div class="col-md-12">
+
+          <div class="account-card">
+            <div class="account-title">
+              <h4>Your order</h4>
+            </div>
+            <div class="account-content">
+              <div class="">
+                <table class="table-list">
+                  <thead>
+                    <tr>
+                      <th scope="col">SL No</th>
+                      <th scope="col">Product</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Total</th>
+                      <th scope="col">action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <h5>01</h5>
+                      </td>
+                      <td><img src="../../images/shop/product/bakery/01.jpg" alt="product"></td>
+                      <td>
+                        <h5>Heriloom Quinoa</h5>
+                      </td>
+                      <td>
+                        <h5>$18<small>/per kilo</small></h5>
+                      </td>
+                      <td>
+                        <h5>2</h5>
+                      </td>
+                      <td>
+                        <h5>$32.00</h5>
+                      </td>
+                      <td>
+                        <ul class="table-action">
+                          <li><a class="view" href="#" title="View This Item" data-toggle="modal" data-target="#product-view"><i class="icofont-eye-alt"></i></a></li>
+                          <li><a class="trash" href="#" title="Remove This Item"><i class="icofont-trash"></i></a></li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h5>02</h5>
+                      </td>
+                      <td><img src="../../images/shop/product/bakery/02.jpg" alt="product"></td>
+                      <td>
+                        <h5>Red Bulgur</h5>
+                      </td>
+                      <td>
+                        <h5>$25<small>/4 packet</small></h5>
+                      </td>
+                      <td>
+                        <h5>3</h5>
+                      </td>
+                      <td>
+                        <h5>$75.00</h5>
+                      </td>
+                      <td>
+                        <ul class="table-action">
+                          <li><a class="view" href="#" title="View This Item" data-toggle="modal" data-target="#product-view"><i class="icofont-eye-alt"></i></a></li>
+                          <li><a class="trash" href="#" title="Remove This Item"><i class="icofont-trash"></i></a></li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h5>03</h5>
+                      </td>
+                      <td><img src="../../images/shop/product/bakery/03.jpg" alt="product"></td>
+                      <td>
+                        <h5>Silken Tofu</h5>
+                      </td>
+                      <td>
+                        <h5>$32<small>/12 pices</small></h5>
+                      </td>
+                      <td>
+                        <h5>5</h5>
+                      </td>
+                      <td>
+                        <h5>$160.00</h5>
+                      </td>
+                      <td>
+                        <ul class="table-action">
+                          <li><a class="view" href="#" title="View This Item" data-toggle="modal" data-target="#product-view"><i class="icofont-eye-alt"></i></a></li>
+                          <li><a class="trash" href="#" title="Remove This Item"><i class="icofont-trash"></i></a></li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="chekout-voucher"><button class="voucher-btn">Do you have a coupon code?</button>
+                <form class="voucher-form"><input type="text" placeholder="Enter your voucher code"><button type="submit" class="btn btn-inline">apply</button></form>
+              </div>
+              <div class="checkout-charge">
+                <ul>
+                  <li><span>Sub total</span><span>$267.45</span></li>
+                  <li><span>delivery fee</span><span>$10.00</span></li>
+                  <li><span>discount</span><span>$00.00</span></li>
+                  <li><span>Total<small>(Incl. VAT)</small></span><span>$277.00</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="chekout-voucher"><button class="voucher-btn">Do you have a coupon code?</button><form class="voucher-form"><input type="text" placeholder="Enter your voucher code"><button type="submit" class="btn btn-inline">apply</button></form></div>
+            <div class="checkout-charge"><ul><li><span>Sub total</span><span>$267.45</span></li><li><span>delivery fee</span><span>$10.00</span></li><li><span>discount</span><span>$00.00</span></li><li><span>Total<small>(Incl. VAT)</small></span><span>$277.00</span></li></ul></div>
+          </div>
+
+
+      </div> <!-- col.// -->
+    
+
+    </div> <!-- row.// -->
+    <!-- =================== COMPONENT 1 CART+SUMMARY .//END  ====================== -->
+
+    <br><br>
+
+  </div> <!-- container .//  -->
+</section>
+
+<section class="padding-y border-top">
+  <div class="container">
+    <header class="section-heading">
+      <h4 class="section-title"> Recommended items</h4>
+    </header>
+
+    <div class="row">
+      {% for product in products %}
+
+      <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+        <div class="product-card">
+          <figure class="product-media">
+            <div class="product-label-group"><label class="product-label label-new">new</label><label class="product-label label-off">-10%</label></div><a class="product-image" href="product-single.html"><img src="{{ product.image.url }}" alt="product"></a>
+          </figure>
+          <div class="product-content">
+            <h5 class="product-price"><span>${{ product.price }} </span><del>$42</del></h5>
+            <h5 class="product-name"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h5>
+            <div class="product-action-group">
+              <div class="product-action"><a href="{% url 'shop:add_favorites' product.id %}" class="action-wish" title="Product Wish"><i class="icofont-ui-love"></i></a><button class="action-cart" title="Add to Cart"><span>add to cart</span></button>
+                <!-- <button class="action-view" title="Product View" data-toggle="modal" data-target="#product-view"><i class="icofont-eye-alt"></i></button> -->
+              </div>
+              <div class="product-action"><button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button><input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"><button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      {% endfor %}
+    </div> <!-- row.// -->
+
+  </div> <!-- container .//  -->
+</section>
+
+<footer class="footer-part">
+  <p>Ecomart | © Copyright by <a href="#">Mironcoder</a></p>
+</footer>
+
+{% endblock content %}

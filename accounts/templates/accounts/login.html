@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="mironcoder">
+  <meta name="email" content="mironcoder@gmail.com">
+  <meta name="profile" content="https://themeforest.net/user/mironcoder">
+  <meta name="template" content="Ecomart">
+  <meta name="title" content="Ecomart - eCommerce HTML Template">
+  <meta name="keywords" content="html, ecomart, ecommerce, clothing, food, electronics, minimal, beauty, shopping, simple, fashion, single vendor, multipurpose, store, shop">
+  <title>Ecomart - Login</title>
+  <link rel="icon" href="https://mironmahmud.com/ecomart/assets/ltr/images/favicon.png">
+  <link rel="stylesheet" href="https://mironmahmud.com/ecomart/assets/ltr/fonts/icofont/icofont.min.css">
+  <link rel="stylesheet" href="https://mironmahmud.com/ecomart/assets/ltr/fonts/flaticon/grocery/flaticon.css">
+  <link rel="stylesheet" href="https://mironmahmud.com/ecomart/assets/ltr/css/vendor/bootstrap.css">
+  <link rel="stylesheet" href="https://mironmahmud.com/ecomart/assets/ltr/css/custom/main.css">
+  <link rel="stylesheet" href="https://mironmahmud.com/ecomart/assets/ltr/css/custom/user-form.css">
+</head>
+
+<body>
+  <section class="user-form-part">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+          <div class="user-form-logo"><a href="index.html"><img src="https://mironmahmud.com/ecomart/assets/ltr/images/logo.png" alt="logo"></a></div>
+          <div class="user-form-card">
+            <div class="user-form-title">
+              <h2>WELCOME!</h2>
+              <p>Use Your Credentials To Access</p>
+            </div>
+            <form method="POST" class="user-form" novalidate>
+              {% csrf_token %}
+              <div class="form-group">
+                <!-- <input type="email" class="form-control" placeholder="Enter your email"> -->
+                {{form}}
+              </div>
+              <div class="form-button"><button type="submit">Login</button>
+                <p>Forgot your password?<a href="reset.html">reset here</a></p>
+              </div>
+            </form>
+          </div>
+          <div class="user-form-remind">
+            <p>Don't Have Any Account?<a href="{% url 'accounts:register' %}">SignUp Here</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer-part">
+    <p>Ecomart | &COPY; Copyright by <a href="#">Mironcoder</a></p>
+  </footer>
+  <script src="https://mironmahmud.com/ecomart/assets/ltr/js/vendor/jquery-1.12.4.min.js"></script>
+  <script src="https://mironmahmud.com/ecomart/assets/ltr/js/vendor/popper.min.js"></script>
+  <script src="https://mironmahmud.com/ecomart/assets/ltr/js/vendor/bootstrap.min.js"></script>
+  <script src="https://mironmahmud.com/ecomart/assets/ltr/js/custom/main.js"></script>
+</body>
+
+</html>
